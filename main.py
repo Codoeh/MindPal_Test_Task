@@ -1,5 +1,13 @@
 import matplotlib
 
+from validators import (
+    dict_keys_validator,
+    positive_number_validator,
+    border_size_validator,
+    objects_type_validator,
+    REQUIRED_KEYS_EXISTING,
+    REQUIRED_KEYS_NEW
+)
 from visualisation import objects_locator
 matplotlib.use("TkAgg")
 
@@ -11,6 +19,26 @@ def find_fitting_objects(
         existing_objects: list[dict],
         new_objects: list[dict]
 ) -> dict:
+
+    positive_number_validator(
+        plot_width, plot_length, restricted_border
+    )
+
+    border_size_validator(
+        plot_width=plot_width,
+        plot_length=plot_length,
+        restricted_border=restricted_border
+    )
+
+    objects_type_validator(existing_objects, new_objects)
+
+    for obj in existing_objects:
+        dict_keys_validator(REQUIRED_KEYS_EXISTING, obj)
+        positive_number_validator(obj["length"], obj["width"])
+
+    for obj in new_objects:
+        dict_keys_validator(REQUIRED_KEYS_NEW, obj)
+        positive_number_validator(obj["length"], obj["width"])
 
     total_area = plot_width * plot_length
     print("Total area:", total_area)
