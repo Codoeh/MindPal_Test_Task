@@ -1,3 +1,9 @@
+import matplotlib
+
+from visualisation import objects_locator
+matplotlib.use("TkAgg")
+
+
 def find_fitting_objects(
         plot_width: float,
         plot_length: float,
@@ -43,6 +49,16 @@ def find_fitting_objects(
             print("Result in iteration:", result)
         else:
             continue
+
+    # Create visualisation
+    objects_locator(
+        plot_width=plot_width,
+        plot_length=plot_length,
+        restricted_border=restricted_border,
+        existing_objects=existing_objects,
+        new_objects=new_objects,
+        result=result
+    )
 
     return result
 
