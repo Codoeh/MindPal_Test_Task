@@ -63,6 +63,17 @@ def objects_locator(
     )
     ax.add_patch(plot_rect)
 
+    # Create restricted border
+    border_rect = plt.Rectangle(
+        (restricted_border, restricted_border),
+        plot_width - 2 * restricted_border,
+        plot_length - 2 * restricted_border,
+        edgecolor="red",
+        facecolor="none",
+        linewidth=2
+    )
+    ax.add_patch(border_rect)
+
     # Existing objects
     for obj in existing_objects:
         # Chose random placement for objects
@@ -119,16 +130,6 @@ def objects_locator(
             )
             ax.add_patch(new_rect)
 
-    # Create restricted border
-    border_rect = plt.Rectangle(
-        (restricted_border, restricted_border),
-        plot_width - 2 * restricted_border,
-        plot_length - 2 * restricted_border,
-        edgecolor="red",
-        facecolor="none",
-        linewidth=2
-    )
-    ax.add_patch(border_rect)
 
     # Create legend on plot
     legend_elements = [
